@@ -3,7 +3,8 @@ import {Link} from "react-router-dom"
 
 const Header = () => {
     return (
-        <nav className = "navbar navbar-expand-sm bg-info text-white">
+        <nav className = "navbar navbar-expand-sm bg-dark navbar-dark">
+            <h1 style = {{color:"white"}}>React</h1>
             <div className = "container-fluid">
                 <ul className = "navbar-nav">
                     <li className="nav-item">
@@ -14,6 +15,9 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                         <Link className = "nav-link" to="/person">Person</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className = "nav-link" to="/crud">CrudDemo</Link>
                     </li>
                     <li className="nav-item">
                         <Link className = "nav-link" to="/about">About</Link>
