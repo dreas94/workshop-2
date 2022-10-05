@@ -10,26 +10,6 @@ const CrudDemo = () =>
     const [requestData, setRequestData] = useState(new Date());
     const [alert,setAlert] = useState({type: '', message: ''});
 
-    const getAllPeopleAction = async () => 
-    {
-        await axios.get(BASE_API_URL)
-        .then(responce => 
-        {
-            if(responce.status === 200)
-            {
-                setPersons(responce.data);
-            }
-            else 
-            {
-                setNewAlert('alert-warning', 'APE Error ' + responce.status)
-            }
-        })
-        .catch(err => 
-        {
-            setNewAlert('alert-danger', 'Error' + err);
-        });
-    }
-
     const setNewAlert = (typeProp, messageProp) =>
     {
         setAlert({type: typeProp , message: messageProp});
@@ -40,29 +20,28 @@ const CrudDemo = () =>
         setRequestData(new Date());
     }
 
-    const getPersonById = async (id) => 
-    {
-        const url = BASE_API_URL + "/" + id;
-        await axios.get(url)
-        .then(responce => 
-        {
-            if(responce.status === 200)
-            {
-                setPersons(responce.data);
-            }
-            else 
-            {
-                setAlert({type: 'alert-warning', message: 'APE Error ' + responce.status})
-            }
-        })
-        .catch(err => 
-        {
-            setNewAlert('alert-danger', 'Error' + err);
-        });
-    }
-
     useEffect(() => 
     {
+        const getAllPeopleAction = async () => 
+        {
+            await axios.get(BASE_API_URL)
+            .then(responce => 
+            {
+                if(responce.status === 200)
+                {
+                    setPersons(responce.data);
+                }
+                else 
+                {
+                    setNewAlert('alert-warning', 'APE Error ' + responce.status)
+                }
+            })
+            .catch(err => 
+            {
+                setNewAlert('alert-danger', 'Error' + err);
+            });
+        }
+
         getAllPeopleAction();
     },[requestData]);
 

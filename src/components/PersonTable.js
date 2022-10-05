@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import AlertMessage from './AlertMessage';
+import {useHistory} from "react-router-dom";
 
 const PersonTableHeader = () => 
 {
@@ -17,6 +18,13 @@ const PersonTableHeader = () =>
 
 const PersonTableAction = (props) => 
 {
+    const history = useHistory();
+
+    const goToDetails = (id) =>
+    {
+        history.push("/persondetails/"+id)
+    }
+
     const deletePersonById = async(BASE_API_URL, id, setNewRequestData, setNewAlert) => 
     {
         const url = BASE_API_URL + id;
@@ -25,6 +33,7 @@ const PersonTableAction = (props) =>
         {
             if(response.status===204)
             {
+                console.log("Delete Person")
                 setNewRequestData();
             }
         })
@@ -36,7 +45,7 @@ const PersonTableAction = (props) =>
 
     return (
         <div>
-            <button type="button" className="btn btn-primary">Details</button>
+            <button type="button" className="btn btn-primary" onClick={() => goToDetails(props.pers.id)}>Details</button>
             <button type="button" onClick={() => deletePersonById(props.BASE_API_URL, props.pers.id, props.setNewRequestData, props.setNewAlert)} className="btn btn-danger">Delete</button>
             <button type="button" className="btn btn-warning">Edit</button>
         </div>
