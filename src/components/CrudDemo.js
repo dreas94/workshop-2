@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect }  from 'react';
 import PersonTable from './PersonTable';
+import Form from './Form';
 
 const CrudDemo = () => 
 {
@@ -47,6 +48,7 @@ const CrudDemo = () =>
 
     return (
         <div>
+            <Form />
             <PersonTable BASE_API_URL={BASE_API_URL} persons={persons} alert={alert} setNewAlert={setNewAlert} setNewRequestData={setNewRequestData}></PersonTable>
         </div>
     );
