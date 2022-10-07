@@ -18,8 +18,8 @@ export default function App()
     }
   
     return (
-        <div className="container">
-            <form className="form-control mt-3 p-3" onSubmit={handleSubmit(onSubmit)} >
+        <div className="container-fluid">
+            <form className="border mt-3 p-3" onSubmit={handleSubmit(onSubmit)} > 
                 <div className="row">
                     <div className="col-6">
                         <input className="form-control" type="text" placeholder="Enter First Name" {...register("firstName", {required: { value: true, message: "First Name Requiered"}, maxLength: 80})} />
@@ -45,12 +45,10 @@ export default function App()
                     </div>
                 </div>
                 <br></br>
-                <div className="row no-gutters">
-                    <div className="col-2">
-                        <button type="submit" className="btn btn-success">Add</button>
-                    </div>
-                    <div className="col-2">
-                        <button type="submit" className="btn btn-danger">Reset</button>
+                <div className="row">
+                    <div className="col">
+                        <button type="submit" className="btn btn-success me-2">Add</button>
+                        <button type="submit" className="btn btn-danger me-2">Reset</button>
                     </div>
                 </div>
           </form>

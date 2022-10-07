@@ -1,15 +1,16 @@
-import React from 'react';
-import axios from 'axios';
-import AlertMessage from './AlertMessage';
+import React from "react";
+import axios from "axios";
+import AlertMessage from "./AlertMessage";
 import {useHistory} from "react-router-dom";
 
 const PersonTableHeader = () => 
 {
     return(
-        <thead>
+        <thead style={{borderBottom: "3px solid black"}}>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Email</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -39,15 +40,15 @@ const PersonTableAction = (props) =>
         })
         .catch(err => 
         {
-            setNewAlert('alert-danger', 'Error' + err)
+            setNewAlert("alert-danger", "Error" + err)
         });
     }
 
     return (
         <div>
-            <button type="button" className="btn btn-primary" onClick={() => goToDetails(props.pers.id)}>Details</button>
-            <button type="button" onClick={() => deletePersonById(props.BASE_API_URL, props.pers.id, props.setNewRequestData, props.setNewAlert)} className="btn btn-danger">Delete</button>
-            <button type="button" className="btn btn-warning">Edit</button>
+            <button type="button" className="btn btn-primary me-1" onClick={() => goToDetails(props.pers.id)}>Details</button>
+            <button type="button" className="btn btn-danger me-1" onClick={() => deletePersonById(props.BASE_API_URL, props.pers.id, props.setNewRequestData, props.setNewAlert)}>Delete</button>
+            <button type="button" className="btn btn-warning me-2">Edit</button>
         </div>
     )
 }
@@ -62,6 +63,7 @@ const PersonTableRow = (props) =>
                         <tr key={person.id}>
                             <td>{person.id}</td>
                             <td>{person.firstName} {person.lastName}</td>
+                            <td>{person.email}</td>
                             <td><PersonTableAction BASE_API_URL={props.BASE_API_URL} pers={person} setNewRequestData={props.setNewRequestData} setNewAlert={props.setNewAlert}></PersonTableAction></td>
                         </tr>
                     );
@@ -75,12 +77,19 @@ const PersonTableRow = (props) =>
 
 const PersonTable = (props) => {
     return (
-        <div className='container'>
-            <table className='table table-striped'>
-                <PersonTableHeader />
-                <PersonTableRow BASE_API_URL={props.BASE_API_URL} persons = {props.persons} setNewRequestData={props.setNewRequestData} setNewAlert={props.setNewAlert}/>
-            </table>
-            <AlertMessage alert={props.alert} />
+        <div className="mt-3 p-3">
+            <div className="card">
+                <div className="card-header text-white bg-dark">
+                        <h5 className="card-title">Person Information</h5>
+                </div>
+                <div div className="card-body">
+                    <table className="table table-striped">
+                        <PersonTableHeader />
+                        <PersonTableRow BASE_API_URL={props.BASE_API_URL} persons = {props.persons} setNewRequestData={props.setNewRequestData} setNewAlert={props.setNewAlert}/>
+                    </table>
+                    <AlertMessage alert={props.alert} />
+                </div>
+            </div>
         </div>
     );
 };
